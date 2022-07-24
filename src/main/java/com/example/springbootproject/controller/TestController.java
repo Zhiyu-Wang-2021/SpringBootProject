@@ -1,5 +1,6 @@
 package com.example.springbootproject.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,11 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 //因为我们前后端要分离，所以只用@RestController
 @RestController
 public class TestController {
+
+    @Value("${test}")
+    private String test;
+
     //@GetMapping @RequestMapping(value = "/hello", method = RequestMethod.DELETE)等表示只接受指定请求
     //@RequestMapping则接受所有请求
     @RequestMapping("/hello")
     public String hello(){
-        return "hello world";
+        return "hello world" + test;
     }
 
     @PostMapping("/hello/post")

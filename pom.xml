@@ -16,6 +16,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -35,6 +36,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--        热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -68,6 +77,8 @@
                 <version>2.3.7.RELEASE</version>
                 <configuration>
                     <mainClass>com.example.springbootproject.SpringBootProjectApplication</mainClass>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                 </configuration>
                 <executions>
                     <execution>
