@@ -1,7 +1,7 @@
 package com.example.springbootproject.service;
 
 
-import com.example.springbootproject.domin.Test;
+import com.example.springbootproject.domain.Test;
 import com.example.springbootproject.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.example.springbootproject.mapper;
 
-import com.example.springbootproject.domin.Test;
+import com.example.springbootproject.domain.Test;
 
 import java.util.List;
 

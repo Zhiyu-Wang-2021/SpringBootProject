@@ -1,6 +1,6 @@
 package com.example.springbootproject.controller;
 
-import com.example.springbootproject.domin.Test;
+import com.example.springbootproject.domain.Test;
 import com.example.springbootproject.service.TestService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

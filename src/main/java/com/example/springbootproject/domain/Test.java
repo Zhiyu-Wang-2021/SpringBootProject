@@ -1,4 +1,4 @@
-package com.example.springbootproject.domin;
+package com.example.springbootproject.domain;
 
 public class Test {
 
