@@ -1,3 +1,6 @@
+GET http://localhost:8080/test/list
+
+###
 POST http://localhost:8080/hello/post
 Content-Type: application/x-www-form-urlencoded
 
