@@ -2,7 +2,6 @@
   <a-layout class="home">
     <a-layout-sider width="200" style="background: #fff">
         <a-menu
-          v-model:selectedKeys="selectedKeys2"
           v-model:openKeys="openKeys"
           mode="inline"
           :style="{ height: '100%', borderRight: 0 }"
@@ -48,15 +47,43 @@
     <a-layout-content
           :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          Content
+          <pre>{{ ebooks }}</pre>
+          <pre>{{ ebooks1 }}</pre>
     </a-layout-content>
   </a-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref, reactive, toRef } from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'HomeView',
+  setup(){
+    console.log("setup");
+    //ref\reactive用于生成響應式的變量
+    const ebooks = ref();
+    const ebooks1 = reactive({
+      books: []
+    });
+
+    onMounted(() => {
+      console.log("onMounted")
+      axios.get("http://localhost:8080/ebook/list?name=11")
+          .then((res) => {
+            console.log(res)
+            const data = res.data
+            //给ref变量赋值的时候要用.value
+            ebooks.value = data.content
+            ebooks1.books = data.content
+          });
+    })
+
+    //在这里return之后才能被界面拿到
+    return {
+      ebooks,
+      ebooks1: toRef(ebooks1, "books")
+    }
+  }
 });
 </script>
