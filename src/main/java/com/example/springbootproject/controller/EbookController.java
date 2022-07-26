@@ -1,6 +1,7 @@
 package com.example.springbootproject.controller;
 
 import com.example.springbootproject.domain.Ebook;
+import com.example.springbootproject.resp.CommonResp;
 import com.example.springbootproject.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,12 @@ public class EbookController {
     @Resource
     private EbookService ebookService;
 
-//    Controller -> Mapper -> XML
-@GetMapping("/list")
-public List<Ebook> list(){
-    return ebookService.list();
-}
+    //    Controller -> Mapper -> XML
+    @GetMapping("/list")
+    public CommonResp list() {
+        CommonResp<List<Ebook>> resp = new CommonResp<>();
+        List<Ebook> list = ebookService.list();
+        resp.setContent(list);
+        return resp;
+    }
 }
