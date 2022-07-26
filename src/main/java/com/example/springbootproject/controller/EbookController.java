@@ -1,7 +1,7 @@
 package com.example.springbootproject.controller;
 
-import com.example.springbootproject.domain.Demo;
-import com.example.springbootproject.service.DemoService;
+import com.example.springbootproject.domain.Ebook;
+import com.example.springbootproject.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,15 +13,15 @@ import java.util.List;
 //@Controller这种则返回页面
 //因为我们前后端要分离，所以只用@RestController
 @RestController
-@RequestMapping("/demo")
-public class DemoController {
+@RequestMapping("/ebook")
+public class EbookController {
 
     @Resource
-    private DemoService demoService;
+    private EbookService ebookService;
 
 //    Controller -> Mapper -> XML
 @GetMapping("/list")
-public List<Demo> list(){
-    return demoService.list();
+public List<Ebook> list(){
+    return ebookService.list();
 }
 }
