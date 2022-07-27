@@ -87,8 +87,6 @@ export default defineComponent({
       { type: 'LikeOutlined', text: '156' },
       { type: 'MessageOutlined', text: '2' },
     ];
-
-    console.log("setup");
     //ref\reactive用于生成響應式的變量
     const ebooks = ref();
     const ebooks1 = reactive({
@@ -96,7 +94,6 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      console.log("onMounted2")
       axios.get("/ebook/list?name=")
           .then((res) => {
             console.log(res)
