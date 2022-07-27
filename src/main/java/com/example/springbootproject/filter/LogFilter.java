@@ -8,6 +8,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+
+/** 用于打印接口耗时 */
 @Component
 public class LogFilter implements Filter {
 
