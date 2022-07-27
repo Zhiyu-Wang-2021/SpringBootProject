@@ -47,19 +47,47 @@
     <a-layout-content
           :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          <pre>{{ ebooks }}</pre>
-          <pre>{{ ebooks1 }}</pre>
+      <a-list :grid="{ gutter: 16, column: 3 }" :data-source="ebooks">
+        <template #renderItem="{ item }">
+          <a-list-item key="item.name">
+            <template #actions>
+              <span v-for="{ type, text } in actions" :key="type">
+                <component :is="type" style="margin-right: 8px" />
+                {{ text }}
+              </span>
+            </template>
+            <a-list-item-meta :description="item.description">
+              <template #title>
+                <a :href="item.href">{{ item.name }}</a>
+              </template>
+              <template #avatar><a-avatar :src="item.cover" /></template>
+            </a-list-item-meta>
+          </a-list-item>
+        </template>
+      </a-list>
     </a-layout-content>
   </a-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, reactive, toRef } from 'vue';
+import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
 import axios from 'axios';
 
 export default defineComponent({
   name: 'HomeView',
+  components: {
+    StarOutlined,
+    LikeOutlined,
+    MessageOutlined,
+  },
   setup(){
+    const actions: Record<string, string>[] = [
+      { type: 'StarOutlined', text: '156' },
+      { type: 'LikeOutlined', text: '156' },
+      { type: 'MessageOutlined', text: '2' },
+    ];
+
     console.log("setup");
     //ref\reactive用于生成響應式的變量
     const ebooks = ref();
@@ -69,7 +97,7 @@ export default defineComponent({
 
     onMounted(() => {
       console.log("onMounted")
-      axios.get("http://localhost:8080/ebook/list?name=11")
+      axios.get("http://localhost:8080/ebook/list?name=")
           .then((res) => {
             console.log(res)
             const data = res.data
@@ -81,6 +109,7 @@ export default defineComponent({
 
     //在这里return之后才能被界面拿到
     return {
+      actions,
       ebooks,
       ebooks1: toRef(ebooks1, "books")
     }
