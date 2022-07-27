@@ -10,3 +10,6 @@ createApp(App)
     .use(router)
     .use(Antd)
     .mount('#app');
+
+console.log('ENV: ', process.env.NODE_ENV);
+console.log('VUE_APP_SERVER: ', process.env.VUE_APP_SERVER);
