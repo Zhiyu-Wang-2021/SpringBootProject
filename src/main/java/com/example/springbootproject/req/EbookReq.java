@@ -1,6 +1,6 @@
 package com.example.springbootproject.req;
 
-public class EbookReq {
+public class EbookReq extends PageReq {
     //url里面的参数可以自动映射到这里的同名变量
     private Long id;
     private String name;

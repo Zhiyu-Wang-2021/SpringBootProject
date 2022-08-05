@@ -6,7 +6,10 @@ import com.example.springbootproject.domain.EbookExample;
 import com.example.springbootproject.mapper.EbookMapper;
 import com.example.springbootproject.req.EbookReq;
 import com.example.springbootproject.resp.EbookResp;
+import com.example.springbootproject.resp.PageResp;
 import com.example.springbootproject.utils.CopyUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -18,12 +21,14 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public List<EbookResp> list(EbookReq req){
+    public PageResp<EbookResp> list(EbookReq req){
+
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
         if(!ObjectUtils.isEmpty(req.getName())) {
             criteria.andNameLike("%" + req.getName() + "%");
         }
+        PageHelper.startPage(req.getPage(), req.getSize());
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
         /*
         put all the ebooks in an ebook response list
@@ -34,8 +39,13 @@ public class EbookService {
             respList.add(ebookResp);
         }
         */
-        List<EbookResp> respList = CopyUtil.copyList(ebookList, EbookResp.class);
+        PageInfo<Ebook> pageInfo = new PageInfo<>(ebookList);
 
-        return respList;
+        List<EbookResp> respList = CopyUtil.copyList(ebookList, EbookResp.class);
+        PageResp<EbookResp> pageResp = new PageResp<>();
+        pageResp.setTotal(pageInfo.getTotal());
+        pageResp.setList(respList);
+
+        return pageResp;
     }
 }
